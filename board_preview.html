@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>استمارة متابعة أثر الخطط (العلاجية / الإثرائية)</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Cairo', sans-serif;
+            background-color: #f3f4f6;
+        }
+        
+        @media print {
+            body { background-color: white; }
+            .no-print { display: none !important; }
+            .print-container {
+                box-shadow: none !important;
+                margin: 0 !important;
+                padding: 0 !important;
+                border: none !important;
+                max-width: 100% !important;
+            }
+            
+            /* تنظيف الحقول النصية والقوائم من الحدود */
+            input:not([type="radio"]), textarea, select {
+                border: none !important;
+                background-color: transparent !important;
+                box-shadow: none !important;
+                resize: none !important;
+                padding: 0 !important;
+                color: black !important;
+                -webkit-appearance: none;
+                overflow: visible !important;
+                white-space: pre-wrap !important;
+            }
+            
+            /* إبراز نوع الخطة المحددة وإخفاء الأخرى بشكل احترافي */
+            input[type="radio"] {
+                display: none !important; /* إخفاء الدائرة الافتراضية */
+            }
+            input[type="radio"]:checked + span {
+                font-weight: 800 !important;
+                color: #1e3a8a !important;
+                border: 2px solid #1e3a8a !important;
+                padding: 2px 12px !important;
+                border-radius: 6px !important;
+                background-color: #eff6ff !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            input[type="radio"]:not(:checked) + span {
+                opacity: 0.3 !important; /* بهتان الخيار غير المحدد */
+            }
+
+            table, th, td { border: 1px solid #1e3a8a !important; }
+            th {
+                background-color: #1e3a8a !important;
+                color: white !important;
+                -webkit-print-color-adjust: exact;
+                print-color-adjust: exact;
+            }
+            
+            /* قواعد الطباعة الاحترافية لتعدد الصفحات */
+            table { page-break-inside: auto; }
+            tr { page-break-inside: avoid; page-break-after: auto; }
+            thead { display: table-header-group; } 
+            tfoot { display: table-footer-group; }
+            .avoid-page-break { page-break-inside: avoid; break-inside: avoid; }
+        }
+    </style>
+</head>
+<body class="p-4 md:p-8">
+
+    <div class="max-w-6xl mx-auto mb-4 flex justify-end gap-4 no-print">
+        <button onclick="window.print()" class="bg-blue-900 hover:bg-blue-800 text-white font-bold py-2 px-6 rounded shadow-lg flex items-center transition">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 ml-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z" />
+            </svg>
+            طباعة الاستمارة
+        </button>
+    </div>
+
+    <div class="print-container max-w-6xl mx-auto bg-white p-8 print:p-2 shadow-xl rounded-lg border-t-8 border-blue-900 print:border-t-4">
+        
+        <div class="text-center mb-8 print:mb-2 border-b-2 border-yellow-500 pb-6 print:pb-2">
+            <h1 class="text-3xl print:text-xl font-bold text-blue-900 mb-2 print:mb-1">استمارة متابعة أثر الخطط (العلاجية / الإثرائية)</h1>
+            <p class="text-gray-600 font-semibold print:text-xs">مبنية على مؤشرات الأداء والتقويم المدرسي</p>
+        </div>
+
+        <!-- معلومات عامة ومؤشرات الأداء -->
+        <div class="mb-8 print:mb-2">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 print:gap-1 bg-blue-50 print:bg-transparent p-6 print:p-0 rounded-lg border border-blue-100 print:border-none print:text-xs">
+                <div class="col-span-1 md:col-span-2 flex items-center gap-6 p-3 print:p-1 bg-white print:bg-transparent rounded border border-gray-200 print:border-none">
+                    <span class="font-bold text-blue-900">نوع الخطة المستهدفة:</span>
+                    <label class="inline-flex items-center cursor-pointer">
+                        <input type="radio" name="planType" value="remedial" class="form-radio text-blue-900" checked>
+                        <span class="ml-2 mr-2 transition-all">خطة علاجية (سد فجوات)</span>
+                    </label>
+                    <label class="inline-flex items-center cursor-pointer">
+                        <input type="radio" name="planType" value="enrichment" class="form-radio text-yellow-500">
+                        <span class="ml-2 mr-2 transition-all">خطة إثرائية (دعم موهوبين)</span>
+                    </label>
+                </div>
+
+                <div class="col-span-1 md:col-span-2 grid grid-cols-1 md:grid-cols-3 print:grid-cols-3 gap-4 print:gap-1 mt-2 print:mt-1">
+                    <div>
+                        <label class="block text-gray-700 font-bold mb-2 print:mb-0">المدرسة:</label>
+                        <input type="text" placeholder="اسم المدرسة" class="w-full px-3 py-2 print:py-0 border rounded focus:outline-none focus:border-blue-900 bg-white print:border-none print:bg-transparent print:font-semibold text-blue-900">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 font-bold mb-2 print:mb-0">العام الدراسي:</label>
+                        <input type="text" placeholder="مثال: 1446 هـ" class="w-full px-3 py-2 print:py-0 border rounded focus:outline-none focus:border-blue-900 bg-white print:border-none print:bg-transparent print:font-semibold text-blue-900">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 font-bold mb-2 print:mb-0">الفصل الدراسي:</label>
+                        <select class="w-full px-3 py-2 print:py-0 border rounded focus:outline-none focus:border-blue-900 bg-white print:border-none print:bg-transparent print:appearance-none print:font-semibold text-blue-900">
+                            <option>الدراسي الأول</option>
+                            <option>الدراسي الثاني</option>
+                            <option>الدراسي الثالث</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-span-1 md:col-span-2 mt-2 print:mt-1">
+                    <label class="block text-gray-700 font-bold mb-2 print:mb-0">مؤشر التقويم المدرسي المرتبط:</label>
+                    <select class="w-full px-3 py-2 print:py-0 border rounded focus:outline-none focus:border-blue-900 bg-white font-semibold print:text-[11px] print:border-none print:bg-transparent print:appearance-none text-blue-900">
+                        <optgroup label="مجال التعليم والتعلم - معيار بناء خبرات التعلم">
+                            <option>(2-1-1-1) توفر المدرسة فرصاً متكافئة للتعلم تلبي احتياجات المتعلمين، ومنهم ذوو الإعاقة والموهوبون.</option>
+                            <option>(2-1-1-2) تدعم المدرسة تنفيذ المناهج بما يحقق نواتج التعلم المستهدفة.</option>
+                            <option>(2-1-1-3) تنوع المدرسة في إستراتيجيات التعليم والتعلم؛ لتلبية احتياجات المتعلمين، ودعم تعلمهم.</option>
+                            <option>(2-1-1-4) تفعل المدرسة التقنية الرقمية: لدعم تعلم المتعلمين وتلبية احتياجاتهم.</option>
+                            <option>(2-1-1-5) تنفذ المدرسة أنشطة تعلم تطبيقية ترتبط بحياة المتعلمين.</option>
+                            <option>(2-1-1-6) تنمي المدرسة المهارات القرائية والعددية الأساسية لدى المتعلمين.</option>
+                            <option>(2-1-1-7) تنمي المدرسة مهارات التفكير والبحث والابتكار لدى المتعلمين.</option>
+                            <option>(2-1-1-8) تنمي المدرسة المهارات العاطفية والاجتماعية لدى المتعلمين.</option>
+                            <option>(2-1-1-9) تعزز المدرسة دافعية المتعلمين للتعلم، والاستمتاع به.</option>
+                        </optgroup>
+                        <optgroup label="مجال التعليم والتعلم - معيار تقويم التعلم">
+                            <option>(2-2-1-1) تطبق المدرسة أساليب وأدوات تقويم متنوعة: للكشف عن مستويات أداء المتعلمين المختلفة.</option>
+                            <option>(2-2-1-2) تطبق المدرسة أساليب وأدوات متنوعة: لتقويم نواتج التعلم المستهدفة في مناهج التعليم.</option>
+                            <option>(2-2-1-3) تحلل المدرسة نتائج التقويم، وتوظفها في تحسين عمليات التعليم والتعلم والتقويم.</option>
+                            <option>(2-2-1-4) تقدم المدرسة التغذية الراجعة للمتعلمين وأولياء أمورهم، وتتابع تقدمهم بشكل مستمر.</option>
+                        </optgroup>
+                    </select>
+                </div>
+
+                <div class="col-span-1 md:col-span-2 grid grid-cols-1 md:grid-cols-3 print:grid-cols-3 gap-4 print:gap-1 mt-2 print:mt-1">
+                    <div>
+                        <label class="block text-gray-700 font-bold mb-2 print:mb-0">فترة المتابعة (من - إلى):</label>
+                        <input type="text" placeholder="مثال: 1/2/1446 - 15/2/1446" class="w-full px-3 py-2 print:py-0 border rounded focus:outline-none focus:border-blue-900 bg-white print:border-none print:bg-transparent print:font-semibold text-blue-900">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 font-bold mb-2 print:mb-0">المادة:</label>
+                        <input type="text" placeholder="مثال: رياضيات" class="w-full px-3 py-2 print:py-0 border rounded focus:outline-none focus:border-blue-900 bg-white print:border-none print:bg-transparent print:font-semibold text-blue-900">
+                    </div>
+                    <div>
+                        <label class="block text-gray-700 font-bold mb-2 print:mb-0">الفصل / الشعبة:</label>
+                        <input type="text" placeholder="مثال: سادس (ب)" class="w-full px-3 py-2 print:py-0 border rounded focus:outline-none focus:border-blue-900 bg-white print:border-none print:bg-transparent print:font-semibold text-blue-900">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- جدول رصد النتائج -->
+        <!-- ملاحظة: إيقاف scrollbar في الطباعة بإضافة print:overflow-visible -->
+        <div class="mb-8 print:mb-3 overflow-x-auto print:overflow-visible">
+            <div class="flex justify-between items-center mb-4 print:mb-1">
+                <h2 class="text-xl print:text-sm font-bold text-blue-900 flex items-center">
+                    <span class="w-2 h-6 print:h-4 bg-yellow-500 ml-2 rounded"></span> جدول رصد أثر التدخل:
+                </h2>
+                <button onclick="addRow()" class="no-print bg-yellow-500 hover:bg-yellow-600 text-blue-900 font-bold py-1 px-3 rounded text-sm transition shadow">
+                    + إضافة مستفيد
+                </button>
+            </div>
+            
+            <table class="w-full text-center border-collapse border border-blue-900 text-sm print:text-xs" id="studentsTable">
+                <thead>
+                    <tr class="bg-blue-900 text-white">
+                        <th class="border border-blue-900 p-2 print:p-1 w-8">م</th>
+                        <th class="border border-blue-900 p-2 print:p-1 w-48">اسم الطالب</th>
+                        <th class="border border-blue-900 p-2 print:p-1 w-48">المهارة المستهدفة / الموهبة</th>
+                        <th class="border border-blue-900 p-2 print:p-1 w-40">نوع التدخل المُنَفذ</th>
+                        <th class="border border-blue-900 p-2 print:p-1 w-16">القياس (قبل)</th>
+                        <th class="border border-blue-900 p-2 print:p-1 w-16">القياس (بعد)</th>
+                        <th class="border border-blue-900 p-2 print:p-1 w-20">معدل التحسن</th>
+                        <th class="border border-blue-900 p-2 print:p-1 w-32">التقييم الختامي (PEERS)</th>
+                        <th class="border border-blue-900 p-2 print:p-1 no-print w-8">حذف</th>
+                    </tr>
+                </thead>
+                <tbody id="tableBody">
+                    <!-- سيتم إضافة الصفوف هنا برمجياً -->
+                </tbody>
+            </table>
+        </div>
+
+        <!-- تحليل الاستجابة وانعكاسها على المؤشر -->
+        <div class="mb-8 print:mb-3 avoid-page-break">
+            <h2 class="text-xl print:text-sm font-bold text-blue-900 mb-4 print:mb-1 flex items-center">
+                <span class="w-2 h-6 print:h-4 bg-yellow-500 ml-2 rounded"></span> التحليل البعدي وانعكاسه على المؤشر:
+            </h2>
+            <div class="space-y-4 print:space-y-1">
+                <div>
+                    <label class="block text-gray-700 font-bold mb-2 print:mb-0 print:text-xs">1. ما هو الأثر الملموس للتدخلات على مستوى أداء الطلاب (إتقان مهارة / إنجاز مشروع)؟</label>
+                    <textarea rows="1" class="w-full px-3 py-2 print:py-0 print:text-xs border rounded focus:outline-none focus:border-blue-900 print:border-b print:border-gray-300 print:border-x-0 print:border-t-0 resize-none overflow-hidden text-blue-900" placeholder="تأملات المعلم/الكوتش حول الأثر..." oninput="this.style.height = ''; this.style.height = this.scrollHeight + 'px'"></textarea>
+                </div>
+                <div>
+                    <label class="block text-gray-700 font-bold mb-2 print:mb-0 print:text-xs mt-2 print:mt-1">2. بناءً على النتائج، ما هي الخطوة القادمة لاستدامة هذا التحسن أو رفع سقف التحدي؟</label>
+                    <textarea rows="1" class="w-full px-3 py-2 print:py-0 print:text-xs border rounded focus:outline-none focus:border-blue-900 print:border-b print:border-gray-300 print:border-x-0 print:border-t-0 resize-none overflow-hidden text-blue-900" placeholder="خطط المتابعة القادمة..." oninput="this.style.height = ''; this.style.height = this.scrollHeight + 'px'"></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- الاعتماد -->
+        <div class="mb-8 print:mb-0 pt-6 print:pt-2 border-t-2 border-gray-200 avoid-page-break">
+            <h2 class="text-xl print:text-sm font-bold text-blue-900 mb-4 print:mb-1 flex items-center">
+                <span class="w-2 h-6 print:h-4 bg-yellow-500 ml-2 rounded"></span> الاعتماد والتوثيق المدرسي:
+            </h2>
+            <div class="grid grid-cols-1 md:grid-cols-3 print:grid-cols-3 gap-8 print:gap-2 text-center mt-6 print:mt-2">
+                <div>
+                    <label class="block text-gray-700 font-bold mb-2 print:mb-1 print:text-xs">معلم المادة:</label>
+                    <div class="flex items-end justify-center mb-1">
+                        <span class="text-sm print:text-[10px] font-bold text-gray-600 ml-1">الاسم:</span>
+                        <input type="text" class="w-2/3 px-2 py-1 print:py-0 focus:outline-none focus:border-blue-900 text-center bg-transparent border-b border-gray-400 print:text-xs">
+                    </div>
+                    <div class="border-t border-gray-800 w-2/3 mx-auto mt-8 print:mt-4 pt-1 text-gray-500 text-xs print:text-[10px] font-semibold">التوقيع</div>
+                </div>
+                <div>
+                    <label class="block text-gray-700 font-bold mb-2 print:mb-1 print:text-xs">الكوتش / المشرف التربوي:</label>
+                    <div class="flex items-end justify-center mb-1">
+                        <span class="text-sm print:text-[10px] font-bold text-gray-600 ml-1">الاسم:</span>
+                        <input type="text" class="w-2/3 px-2 py-1 print:py-0 focus:outline-none focus:border-blue-900 text-center bg-transparent border-b border-gray-400 print:text-xs">
+                    </div>
+                    <div class="border-t border-gray-800 w-2/3 mx-auto mt-8 print:mt-4 pt-1 text-gray-500 text-xs print:text-[10px] font-semibold">التوقيع</div>
+                </div>
+                <div>
+                    <label class="block text-gray-700 font-bold mb-2 print:mb-1 print:text-xs">مدير المدرسة:</label>
+                    <div class="flex items-end justify-center mb-1">
+                        <span class="text-sm print:text-[10px] font-bold text-gray-600 ml-1">الاسم:</span>
+                        <input type="text" class="w-2/3 px-2 py-1 print:py-0 focus:outline-none focus:border-blue-900 text-center bg-transparent border-b border-gray-400 print:text-xs">
+                    </div>
+                    <div class="border-t border-gray-800 w-2/3 mx-auto mt-8 print:mt-4 pt-1 text-gray-500 text-xs print:text-[10px] font-semibold">التوقيع</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- حقوق الحفظ -->
+        <div class="text-center text-xs print:text-[10px] text-gray-400 mt-8 print:mt-3 pt-4 border-t border-gray-200 avoid-page-break">
+            &copy; 2026 جميع الحقوق محفوظة لنموذج MOODE للكوتشينج التعليمي
+        </div>
+
+    </div>
+
+    <script>
+        let rowCount = 0;
+
+        function addRow() {
+            rowCount++;
+            const tbody = document.getElementById('tableBody');
+            const tr = document.createElement('tr');
+            tr.className = "hover:bg-gray-50 transition";
+            tr.innerHTML = `
+                <td class="border border-blue-900 p-1 print:p-0 font-bold">${rowCount}</td>
+                <td class="border border-blue-900 p-1 print:p-0"><input type="text" class="w-full p-1 print:p-0 text-center border-none focus:ring-1 focus:ring-yellow-500 bg-transparent print:text-xs" placeholder="الاسم"></td>
+                <td class="border border-blue-900 p-1 print:p-0"><input type="text" class="w-full p-1 print:p-0 text-center border-none focus:ring-1 focus:ring-yellow-500 bg-transparent print:text-xs" placeholder="المهارة / المشروع"></td>
+                <td class="border border-blue-900 p-1 print:p-0">
+                    <select class="w-full p-1 print:p-0 text-center border-none focus:ring-1 focus:ring-yellow-500 bg-transparent cursor-pointer text-xs print:appearance-none">
+                        <option>أوراق عمل مكثفة</option>
+                        <option>تعلم بالأقران</option>
+                        <option>مشروع بحثي (إثرائي)</option>
+                        <option>تحدي متقدم (إثرائي)</option>
+                    </select>
+                </td>
+                <td class="border border-blue-900 p-1 print:p-0">
+                    <select class="w-full p-1 print:p-0 text-center border-none focus:ring-1 focus:ring-yellow-500 bg-transparent before-val print:text-xs print:appearance-none" onchange="calculate(this)">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </td>
+                <td class="border border-blue-900 p-1 print:p-0">
+                    <select class="w-full p-1 print:p-0 text-center border-none focus:ring-1 focus:ring-yellow-500 bg-transparent after-val print:text-xs print:appearance-none" onchange="calculate(this)">
+                        <option value="0">0</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                        <option value="6">6</option>
+                        <option value="7">7</option>
+                        <option value="8">8</option>
+                        <option value="9">9</option>
+                        <option value="10">10</option>
+                    </select>
+                </td>
+                <td class="border border-blue-900 p-1 print:p-0 bg-blue-50 print:bg-transparent result-cell font-bold text-blue-900 print:text-xs" dir="ltr">0%</td>
+                <td class="border border-blue-900 p-1 print:p-0 align-middle">
+                    <div class="peers-indicator w-full px-2 py-1 print:p-1">
+                        <div class="text-[10px] font-bold text-gray-500 mb-1 print:mb-0.5 print:text-[8px]">في انتظار القياس...</div>
+                        <div class="w-full bg-gray-200 rounded-full h-2 print:h-1.5">
+                            <div class="bg-gray-400 h-2 print:h-1.5 rounded-full transition-all duration-500" style="width: 0%"></div>
+                        </div>
+                    </div>
+                </td>
+                <td class="border border-blue-900 p-1 no-print">
+                    <button onclick="removeRow(this)" class="text-red-500 hover:text-red-700 font-bold p-1 rounded">X</button>
+                </td>
+            `;
+            tbody.appendChild(tr);
+            updateRowNumbers();
+        }
+
+        function removeRow(btn) {
+            const row = btn.parentNode.parentNode;
+            row.parentNode.removeChild(row);
+            updateRowNumbers();
+        }
+
+        function updateRowNumbers() {
+            const rows = document.getElementById('tableBody').getElementsByTagName('tr');
+            rowCount = rows.length;
+            for (let i = 0; i < rows.length; i++) {
+                rows[i].cells[0].innerText = i + 1;
+            }
+        }
+
+        function calculate(input) {
+            const row = input.parentNode.parentNode;
+            const beforeVal = parseFloat(row.querySelector('.before-val').value) || 0;
+            const afterVal = parseFloat(row.querySelector('.after-val').value) || 0;
+            const resultCell = row.querySelector('.result-cell');
+            const peersIndicator = row.querySelector('.peers-indicator');
+            
+            const maxScore = 10; // الدرجة القصوى بناءً على التقييم الذاتي
+            let diff = afterVal - beforeVal;
+            
+            // حساب نسبة التحسن من الدرجة الكلية (10)
+            let improvementRate = (diff / maxScore) * 100;
+            let afterRate = (afterVal / maxScore) * 100; // نسبة مستوى الطالب الحالي
+
+            // تحديث خلية معدل التحسن
+            if (diff > 0) {
+                resultCell.innerHTML = `<span class="text-green-600 print:text-gray-900" dir="ltr">+${improvementRate.toFixed(0)}%</span>`;
+            } else if (diff < 0) {
+                resultCell.innerHTML = `<span class="text-red-600 print:text-gray-900" dir="ltr">${improvementRate.toFixed(0)}%</span>`;
+            } else {
+                resultCell.innerHTML = `<span dir="ltr">0%</span>`;
+            }
+
+            // تحديث المؤشر الخطي (PEERS)
+            let barColor = "bg-green-500";
+            let statusText = "في تقدم";
+            
+            if (afterVal === maxScore) {
+                barColor = "bg-green-600";
+                statusText = "حقق المعيار 🌟";
+            } else if (diff > 0) {
+                barColor = "bg-green-400";
+                statusText = "تحسن ملحوظ 📈";
+            } else if (diff < 0) {
+                barColor = "bg-red-500";
+                statusText = "يحتاج مراجعة 📉";
+            } else if (afterVal === 0 && beforeVal === 0) {
+                barColor = "bg-gray-400";
+                statusText = "في انتظار القياس...";
+            } else {
+                barColor = "bg-yellow-500";
+                statusText = "ثبات في المستوى ➖";
+            }
+
+            peersIndicator.innerHTML = `
+                <div class="text-[10px] font-bold text-gray-700 mb-1 print:mb-0.5 print:text-[8px]">${statusText}</div>
+                <div class="w-full bg-gray-200 rounded-full h-2 print:h-1.5">
+                    <div class="${barColor} h-2 print:h-1.5 rounded-full transition-all duration-500" style="width: ${afterRate}%"></div>
+                </div>
+            `;
+        }
+
+        window.onload = () => {
+            // جعل العدد الافتراضي 5 ليناسب صفحة واحدة تماماً
+            for(let i=0; i<5; i++) addRow();
+        }
+    </script>
+</body>
+</html>
