@@ -45,13 +45,13 @@
         }
 
         @media print {
-            /* إعدادات صفحة A4 واحدة */
-            @page { size: A4 portrait; margin: 1cm; }
+            /* إعدادات صفحة A4 واحدة صارمة */
+            @page { size: A4 portrait; margin: 0.5cm; }
             body { 
                 background: white; 
-                -webkit-print-color-adjust: exact; /* لضمان طباعة الألوان */
+                -webkit-print-color-adjust: exact; 
                 print-color-adjust: exact; 
-                font-size: 12px !important;
+                font-size: 11px !important;
             }
             #form-container { 
                 box-shadow: none; 
@@ -62,28 +62,32 @@
             }
             .no-print { display: none !important; }
             
-            /* تقليص المسافات لضمان الاحتواء في صفحة واحدة */
-            .p-8, .md\:p-8, .p-6 { padding: 12px !important; }
-            .space-y-10 > :not([hidden]) ~ :not([hidden]) { margin-top: 12px !important; }
-            .space-y-8 > :not([hidden]) ~ :not([hidden]) { margin-top: 10px !important; }
-            .space-y-6 > :not([hidden]) ~ :not([hidden]) { margin-top: 8px !important; }
-            .gap-6, .gap-3 { gap: 8px !important; }
-            .pt-8 { padding-top: 12px !important; }
+            /* تقليص صارم للمسافات */
+            .p-8, .md\:p-8, .p-6 { padding: 8px !important; }
+            .space-y-10 > :not([hidden]) ~ :not([hidden]) { margin-top: 6px !important; }
+            .space-y-6 > :not([hidden]) ~ :not([hidden]) { margin-top: 4px !important; }
+            .space-y-4 > :not([hidden]) ~ :not([hidden]) { margin-top: 3px !important; }
+            .gap-6, .gap-3, .gap-4 { gap: 4px !important; }
+            .pt-8, .pt-6, .pt-5 { padding-top: 6px !important; }
+            .mt-6 { margin-top: 6px !important; }
             
             /* تصغير حجم حقول الإدخال والنصوص */
-            input[type="text"], select { 
-                padding: 6px !important; 
-                font-size: 11px !important; 
+            input[type="text"], input[type="date"], select { 
+                padding: 4px !important; 
+                font-size: 10px !important; 
                 border-width: 1px !important;
             }
-            h1 { font-size: 24px !important; margin-bottom: 4px !important; }
-            h3.text-lg { font-size: 14px !important; }
-            .text-sm { font-size: 11px !important; }
-            .text-xs { font-size: 9px !important; }
+            h1 { font-size: 20px !important; margin-bottom: 2px !important; }
+            h3.text-lg { font-size: 13px !important; margin-bottom: 2px !important; }
+            .text-sm { font-size: 10px !important; }
+            .text-xs { font-size: 8px !important; }
             
-            /* تصغير مساحة التوقيع أكثر في الطباعة */
-            #signaturePad, #padTeacher, #padCoach, #padPrincipal { height: 50px !important; border-width: 1px !important;}
-            textarea { height: 40px !important; min-height: 40px !important; padding: 4px !important; }
+            /* تصغير مساحة التوقيع والنصوص متعددة الأسطر */
+            #signaturePad, #padTeacher, #padCoach, #padPrincipal { height: 40px !important; border-width: 1px !important;}
+            textarea { height: 35px !important; min-height: 35px !important; padding: 4px !important; font-size: 10px !important; }
+            
+            /* تعديل العرض للمربعات الجانبية في الطباعة */
+            .md\:w-32 { width: auto !important; min-width: 70px !important; padding: 2px !important; }
             
             /* منع انقسام العناصر بين الصفحات */
             .grid, .flex, .bg-blue-50\/50, .bg-white { page-break-inside: avoid; break-inside: avoid; }
@@ -189,35 +193,35 @@
                 <div class="space-y-4">
                     <!-- Mission -->
                     <div class="flex flex-col md:flex-row gap-3 md:items-center">
-                        <div class="md:w-32 flex-shrink-0 bg-blue-50 text-blue-800 font-bold p-2 rounded text-center border border-blue-100">
+                        <div class="md:w-32 flex-shrink-0 bg-blue-50 text-blue-800 font-bold p-2 rounded text-start border border-blue-100">
                             M - Mission<br><span class="text-xs font-normal">الهدف/المهمة</span>
                         </div>
                         <input type="text" class="w-full p-3 border-2 border-slate-100 rounded-lg focus:border-blue-600 outline-none" placeholder="ما هو الهدف الأساسي الذي ركزت عليه الجلسة؟">
                     </div>
                     <!-- Observe -->
                     <div class="flex flex-col md:flex-row gap-3 md:items-center">
-                        <div class="md:w-32 flex-shrink-0 bg-blue-50 text-blue-800 font-bold p-2 rounded text-center border border-blue-100">
+                        <div class="md:w-32 flex-shrink-0 bg-blue-50 text-blue-800 font-bold p-2 rounded text-start border border-blue-100">
                             O - Observe<br><span class="text-xs font-normal">الواقع/الملاحظة</span>
                         </div>
                         <input type="text" class="w-full p-3 border-2 border-slate-100 rounded-lg focus:border-blue-600 outline-none" placeholder="كيف تصف واقعك الحالي ونقطة انطلاقك؟">
                     </div>
                     <!-- Options -->
                     <div class="flex flex-col md:flex-row gap-3 md:items-center">
-                        <div class="md:w-32 flex-shrink-0 bg-blue-50 text-blue-800 font-bold p-2 rounded text-center border border-blue-100">
+                        <div class="md:w-32 flex-shrink-0 bg-blue-50 text-blue-800 font-bold p-2 rounded text-start border border-blue-100">
                             O - Options<br><span class="text-xs font-normal">الخيارات/البدائل</span>
                         </div>
                         <input type="text" class="w-full p-3 border-2 border-slate-100 rounded-lg focus:border-blue-600 outline-none" placeholder="ما هي البدائل والحلول التي اكتشفتها؟">
                     </div>
                     <!-- Decision -->
                     <div class="flex flex-col md:flex-row gap-3 md:items-center">
-                        <div class="md:w-32 flex-shrink-0 bg-green-50 text-green-800 font-bold p-2 rounded text-center border border-green-100">
+                        <div class="md:w-32 flex-shrink-0 bg-green-50 text-green-800 font-bold p-2 rounded text-start border border-green-100">
                             D - Decision<br><span class="text-xs font-normal">القرار/الخطة</span>
                         </div>
                         <input type="text" class="w-full p-3 border-2 border-slate-100 rounded-lg focus:border-green-600 outline-none" placeholder="ما هي الخطوات الإجرائية التي قررت تنفيذها؟">
                     </div>
                     <!-- Evaluate -->
                     <div class="flex flex-col md:flex-row gap-3 md:items-center">
-                        <div class="md:w-32 flex-shrink-0 bg-green-50 text-green-800 font-bold p-2 rounded text-center border border-green-100">
+                        <div class="md:w-32 flex-shrink-0 bg-green-50 text-green-800 font-bold p-2 rounded text-start border border-green-100">
                             E - Evaluate<br><span class="text-xs font-normal">التقييم/الأثر</span>
                         </div>
                         <input type="text" class="w-full p-3 border-2 border-slate-100 rounded-lg focus:border-green-600 outline-none" placeholder="كيف ستقيس نجاح خطتك والأثر المتحقق؟">
